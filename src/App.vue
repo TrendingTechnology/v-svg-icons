@@ -7,39 +7,38 @@
 </template>
 
 <script>
-
 import Header from "@/components/Header";
 import Search from "@/components/Search";
 import iconList from "@/components/icons";
 export default {
   name: "App",
-  data(){
-    return{
-      searchText: "",
-    }
+  data() {
+    return {
+      searchText: ""
+    };
   },
-  components: {iconList, Search, Header},
+  components: { iconList, Search, Header }
 };
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap");
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Baloo Tamma 2', cursive, sans-serif;
+  font-family: "Baloo Tamma 2", cursive, sans-serif;
 }
-a{
+a {
   color: inherit;
   text-decoration: none;
 }
-.container{
+.container {
   width: 1200px;
   margin: 0 auto;
 }
 @media (max-width: 1200px) {
-  .container{
+  .container {
     width: 100%;
     padding: 0 20px;
   }

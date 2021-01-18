@@ -1,48 +1,73 @@
 <template>
   <div class="header">
     <div class="container">
-      <h1 class="logo"> Vue Svg Icons <span>v0.0.2</span></h1>
-      <a href="https://github.com/mehmetsagir/v-svg-icons#README" target="_blank" ref="non">Documentation</a>
+      <div class="logo">
+        <h1>
+          Vue Svg Icons
+          <a href="https://npmjs.com/v-svg-icons" target="_blank">v1.0.0</a>
+        </h1>
+      </div>
+      <a
+        href="https://github.com/mehmetsagir/v-svg-icons#readme"
+        target="_blank"
+        ref="non"
+      >
+        <icon name="book" width="20px" height="20px" color="#219187" />
+        Documentation
+      </a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Header",
-}
+  name: "Header"
+};
 </script>
 
 <style lang="scss" scoped>
-.header{
-  height: 100px;
-  border-bottom: 1px solid rgba(#ccc, .3);
-  .container{
-    height: 100%;
+.header {
+  border-bottom: 1px solid rgba(#ccc, 0.3);
+  .container {
+    padding: 30px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    a{
-      font-size: 20px;
+    a {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      svg {
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
     }
-    h1{
+    h1 {
       font-size: 30px;
       font-weight: 500;
       cursor: pointer;
-      &::selection, span::selection{
-        background: none;
-      }
-      span{
-        font-size: 16px;
+      a {
+        display: inline-block;
+        font-size: 15px;
         font-weight: 400;
+      }
+      &::selection,
+      span::selection {
+        background: none;
       }
     }
   }
 }
-@media  (max-width: 500px){
-  .header .container{
+@media (max-width: 1200px) {
+  .header .container {
+    padding: 30px 15px;
+  }
+}
+@media (max-width: 500px) {
+  .header .container {
     height: max-content !important;
-    padding: 10px 0;
+    padding: 20px 0;
     flex-direction: column;
   }
 }

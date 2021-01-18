@@ -4,7 +4,7 @@ import store from "./store";
 import icons from "v-svg-icons";
 
 Vue.config.productionTip = false;
-Vue.component('icon', icons);
+Vue.component("icon", icons);
 
 new Vue({
   store,
