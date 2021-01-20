@@ -2,7 +2,7 @@
   <div class="container">
     <div class="search">
       <input
-        type="text"
+        type="search"
         autocomplete="off"
         autofocus
         id="search"
@@ -24,9 +24,13 @@ export default {
       searchText: ""
     };
   },
+  props: ["reset"],
   watch: {
     searchText() {
       this.$emit("searchText", this.searchText);
+    },
+    reset(){
+      this.searchText = "";
     }
   }
 };

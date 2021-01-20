@@ -1,41 +1,48 @@
 <template>
   <div class="container">
     <div class="alert" v-if="filteredList.length == 0">
-      No results found for <b>{{ searchText }}</b
-      >!
+      No results found for <b>{{ searchText }}</b>!
     </div>
     <div class="icon-box" v-for="(icon, index) in filteredList" :key="index">
       <div
         class="icon"
-        v-if="icon.toLowerCase().includes(searchText.trim().toLowerCase())"
+        v-if="icon.title.toLowerCase().includes(searchText.trim().toLowerCase())"
         @click="copy(icon)"
       >
-        <icon :name="icon" width="35px" height="35px" color="#495057" />
-        <span>{{ icon }}</span>
+        <icon :name="icon.title" width="35px" height="35px" color="#495057" />
+        <span>{{ icon.title }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Axios from "axios";
+
 export default {
   name: "iconList",
   props: ["searchText"],
   methods: {
     copy(icon) {
+      Axios.put('https://v-svg-icons-server.herokuapp.com/updateView/' + icon._id, {
+        viewsCount: icon.viewsCount + 1
+      }).catch(err => {
+        console.log(err)
+      })
+
       document.querySelectorAll(".icon-box .icon").forEach(item => {
         item.classList.remove("active");
-        if (item.lastChild.innerText == icon) {
+        if (item.lastChild.innerText == icon.title) {
           item.lastChild.innerHTML = "Copied!";
           item.classList.add("active");
           setTimeout(() => {
             item.classList.remove("active");
-            item.lastChild.innerText = icon;
+            item.lastChild.innerText = icon.title;
           }, 500);
         }
       });
       let textarea = document.createElement("textarea");
-      textarea.value = icon;
+      textarea.value = icon.title;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
@@ -45,7 +52,7 @@ export default {
   computed: {
     filteredList() {
       return this.$store.state.iconList.filter(icon => {
-        return icon
+        return icon.title
           .toLowerCase()
           .includes(this.searchText.trim().toLowerCase());
       });

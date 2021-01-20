@@ -2,9 +2,9 @@
   <div class="header">
     <div class="container">
       <div class="logo">
-        <h1>
+        <h1 @click="resetSearchText">
           Vue Svg Icons
-          <a href="https://npmjs.com/v-svg-icons" target="_blank">v1.0.0</a>
+          <a href="https://npmjs.com/v-svg-icons" target="_blank">{{ this.$store.state.version.version }}</a>
         </h1>
       </div>
       <a
@@ -21,7 +21,18 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data(){
+    return{
+      reset: true
+    }
+  },
+  methods: {
+    resetSearchText(){
+      this.reset = !this.reset;
+      this.$emit('resetSearch', this.reset)
+    }
+  }
 };
 </script>
 

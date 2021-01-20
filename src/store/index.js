@@ -1,63 +1,38 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Axios from "axios";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    iconList: [
-      "arrow-circle-up",
-      "arrow-alt-circle-up",
-      "arrow-circle-right",
-      "arrow-alt-circle-right",
-      "arrow-circle-left",
-      "arrow-alt-circle-left",
-      "arrow-circle-down",
-      "arrow-alt-circle-down",
-      "arrows-alt",
-      "arrow-left",
-      "arrow-right",
-      "arrow-up",
-      "arrow-down",
-      "github-alt",
-      "github-square",
-      "github",
-      "book",
-      "facebook-f",
-      "facebook",
-      "facebook-square",
-      "facebook-messenger",
-      "instagram",
-      "instagram-square",
-      "linkedin-in",
-      "linkedin",
-      "twitter",
-      "twitter-square",
-      "stack-overflow",
-      "hashtag",
-      "user-regular",
-      "user",
-      "user-friends",
-      "users",
-      "users-slash",
-      "user-slash",
-      "mail-bulk",
-      "envelope-open-regular",
-      "envelope-open-text",
-      "envelope",
-      "envelope-regular",
-      "paper-plane",
-      "paper-plane-regular",
-      "angle-down",
-      "angle-left",
-      "angle-right",
-      "angle-up",
-      "angle-double-down",
-      "angle-double-left",
-      "angle-double-right",
-      "angle-double-up"
-    ],
-    githubRepo: "https://github.com/mehmetsagir/v-svg-icons"
+    githubRepo: "https://github.com/mehmetsagir/v-svg-icons",
+    iconList: [],
+    version: "",
+  },
+  mutations: {
+    initIconList(state, iconList){
+      state.iconList = iconList;
+    },
+    initVersion(state, version){
+      state.version = version;
+    }
+  },
+  actions: {
+    fetchIcons(context){
+      Axios.get('https://v-svg-icons-server.herokuapp.com/').then(res => {
+        context.commit('initIconList', res.data.reverse())
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    fetchVersion(context){
+      Axios.get('https://v-svg-icons-server.herokuapp.com/version/').then(res => {
+        context.commit('initVersion', res.data[0])
+      }).catch(err => {
+        console.log(err)
+      })
+    }
   },
   getters: {
     countIcons(state) {
